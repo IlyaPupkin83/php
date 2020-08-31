@@ -8,7 +8,7 @@
 
 * CSS (Bootstrap)
 
-* Java Script
+* JavaScript
 
 * Web-fonts (Share Tech Mono)
 
