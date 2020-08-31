@@ -106,7 +106,7 @@ document.getElementById('btn_9').addEventListener('click', function () {
 document.getElementById('btn_0').addEventListener('click', function () {
 	if (inputWindow.value === '0') {
 		inputWindow.value = '0';
-		outputWindow.value = '0';
+		outputWindow.value += '0';
 	} else {
 		inputWindow.value += '0';
 		outputWindow.value += '0';

@@ -1,15 +1,34 @@
+#calc {
+	background: rgb(200, 200, 200);
+}
+
 .calc-row {
-	height: 100vh;
+	height: 250px;
 	font-family: "Share Tech Mono", monospace;
 }
 
 .output-window {
-	height: 29vh;
-	font-size: x-large;
+	height: 240px;
+	font-size: large;
 	word-wrap: break-word;
+	overflow: hidden;
 }
 
 .input-window {
 	text-align: end;
 	font-size: x-large;
+}
+
+.btn {
+	background: #7992ff;
+	border: 1px solid black;
+	color: rgb(255, 255, 255);
+}
+
+#btn_clr {
+	background: rgb(255, 135, 135);
+}
+
+.card-body {
+	border: 1px solid rgb(0, 0, 0);
 }
