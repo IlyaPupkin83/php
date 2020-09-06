@@ -1,9 +1,10 @@
 let minValue0 = parseInt(prompt('Минимальное знание числа для игры', '0')) || 0;
-let maxValue0 = parseInt(prompt('Максимальное знание числа для игры', '100')) || 100;
+let maxValue0Str = prompt('Максимальное знание числа для игры', '0') || 100;
+maxValue0 = parseInt(maxValue0Str);
 (minValue0 < -999) ? minValue = -999 :
-(minValue0 > 999) ? minValue = 999 : minValue = minValue0;
+	(minValue0 > 999) ? minValue = 999 : minValue = minValue0;
 (maxValue0 > 999) ? maxValue = 999 :
-(maxValue0 < -999) ? maxValue = -999 : maxValue = maxValue0;
+	(maxValue0 < -999) ? maxValue = -999 : maxValue = maxValue0;
 alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 let answerNumber = Math.floor((minValue + maxValue) / 2);
 let orderNumber = 1;
@@ -13,7 +14,40 @@ const orderNumberField = document.getElementById('orderNumberField');
 const answerField = document.getElementById('answerField');
 
 orderNumberField.innerText = orderNumber;
-answerField.innerText = `Вы загадали число ${answerNumber}?`;
+
+var ones = ['', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'];
+var tens = ['', '', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто'];
+var teens = ['десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семьнадцать', 'восемьнадцать', 'девятнадцать'];
+var hungreds = ['сто', 'двести', 'триста', 'четыреста', 'пятьсот', 'шестьсот', 'семьсот', 'восемьсот', 'девятсот'];
+
+function convert_hundreds(answerNumber) {
+	if (Math.abs(answerNumber) > 99) {
+		return hungreds[Math.floor(Math.abs(answerNumber) / 100) - 1] + ' ' + convert_tens(Math.abs(answerNumber) % 100);
+	} else
+		return convert_tens(answerNumber);
+}
+
+function convert_tens(answerNumber) {
+	if ((Math.abs(answerNumber) > 0) && (Math.abs(answerNumber) < 10)) {
+		return ones[Math.abs(answerNumber)];
+	} else if ((Math.abs(answerNumber) >= 10) && (Math.abs(answerNumber) < 20))
+		return teens[Math.abs(answerNumber) - 10];
+	else
+		return tens[Math.floor(Math.abs(answerNumber) / 10)] + " " + ones[Math.abs(answerNumber) % 10];
+}
+
+function convert(answerNumber) {
+	if (answerNumber == 0) return "ноль";
+	else if (answerNumber < 0) {
+		answerNumberInWords = convert_hundreds(answerNumber);
+		return "минус" + ' ' + answerNumberInWords;
+	} else
+		return convert_hundreds(answerNumber);
+}
+
+answerNumberInWords = convert(answerNumber);
+
+answerField.innerText = `Вы загадали число ${answerNumberInWords}?`;
 
 document.getElementById('btnRetry').addEventListener('click', function () {
 	minValue = parseInt(prompt('Минимальное знание числа для игры', '0'));
@@ -25,7 +59,8 @@ document.getElementById('btnRetry').addEventListener('click', function () {
 	const orderNumberField = document.getElementById('orderNumberField');
 	const answerField = document.getElementById('answerField');
 	orderNumberField.innerText = orderNumber;
-	answerField.innerText = `Вы загадали число ${answerNumber}?`;
+	answerNumberInWords = convert(answerNumber);
+	answerField.innerText = `Вы загадали число ${answerNumberInWords}?`;
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
@@ -47,12 +82,13 @@ document.getElementById('btnOver').addEventListener('click', function () {
 			answerNumber = Math.floor((minValue + maxValue) / 2);
 			orderNumber++;
 			orderNumberField.innerText = orderNumber;
+			answerNumberInWords = convert(answerNumber);
 			const phraseRandom = Math.round(Math.random() * 2);
 			const answerPhrase = (phraseRandom === 0) ?
-				`Вы загадали число ${answerNumber}?` :
+				`Вы загадали число ${answerNumberInWords}?` :
 				(phraseRandom === 1) ?
-					`Да это легко! Ты загадал ${answerNumber}` :
-					`Наверное, это число ${answerNumber}`;
+					`Да это легко! Ты загадал ${answerNumberInWords}` :
+					`Наверное, это число ${answerNumberInWords}`;
 
 			answerField.innerText = answerPhrase;
 		}
@@ -94,12 +130,13 @@ document.getElementById('btnLess').addEventListener('click', function () {
 			answerNumber = Math.floor((minValue + maxValue) / 2);
 			orderNumber++;
 			orderNumberField.innerText = orderNumber;
+			answerNumberInWords = convert(answerNumber);
 			const phraseRandom = Math.round(Math.random() * 2);
 			const answerPhrase = (phraseRandom === 0) ?
-				`Вы загадали число ${answerNumber}?` :
+				`Вы загадали число ${answerNumberInWords}?` :
 				(phraseRandom === 1) ?
-					`Да это легко! Ты загадал ${answerNumber}` :
-					`Наверное, это число ${answerNumber}`;
+					`Да это легко! Ты загадал ${answerNumberInWords}` :
+					`Наверное, это число ${answerNumberInWords}`;
 
 			answerField.innerText = answerPhrase;
 		}
