@@ -22,7 +22,7 @@ var hungreds = ['сто', 'двести', 'триста', 'четыреста', 
 
 function convert_hundreds(answerNumber) {
 	if (Math.abs(answerNumber) > 99) {
-		return hungreds[Math.floor(Math.abs(answerNumber) / 100) - 1] + ' ' + convert_tens(Math.abs(answerNumber) % 100);
+		return hungreds[Math.floor(Math.abs(answerNumber) / 100) - 1] + " " + convert_tens(Math.abs(answerNumber) % 100);
 	} else
 		return convert_tens(answerNumber);
 }
@@ -40,30 +40,22 @@ function convert(answerNumber) {
 	if (answerNumber == 0) return "ноль";
 	else if (answerNumber < 0) {
 		answerNumberInWords = convert_hundreds(answerNumber);
-		return "минус" + ' ' + answerNumberInWords;
+		return "минус" + " " + answerNumberInWords;
 	} else
 		return convert_hundreds(answerNumber);
 }
 
-answerNumberInWords = convert(answerNumber);
+answerNumberInWords0 = convert(answerNumber);
+answerNumberInWords = (answerNumberInWords0.length < 20) ? answerNumberInWords0 : answerNumber;
 
 answerField.innerText = `Вы загадали число ${answerNumberInWords}?`;
 
 document.getElementById('btnRetry').addEventListener('click', function () {
-	minValue = parseInt(prompt('Минимальное знание числа для игры', '0'));
-	maxValue = parseInt(prompt('Максимальное знание числа для игры', '100'));
-	alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
-	answerNumber = Math.floor((minValue + maxValue) / 2);
-	orderNumber = 1;
-	gameRun = true;
-	const orderNumberField = document.getElementById('orderNumberField');
-	const answerField = document.getElementById('answerField');
-	orderNumberField.innerText = orderNumber;
-	answerNumberInWords = convert(answerNumber);
-	answerField.innerText = `Вы загадали число ${answerNumberInWords}?`;
+	window.location.reload();
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
+	$('.collapse').collapse("toggle");
 	if (gameRun) {
 		if (minValue === maxValue) {
 			const phraseRandom = Math.round(Math.random() * 3);
