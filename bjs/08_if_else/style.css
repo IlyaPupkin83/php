@@ -33,3 +33,16 @@
 .btn-success {
 	height: 50px;
 }
+
+.btn-group .fa {
+	font-size: 20px;
+}
+
+.card-footer .btn {
+	background-color: #004987;
+	color: white;
+}
+
+.card-footer {
+	background-color: white;
+}

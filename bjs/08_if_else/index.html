@@ -33,10 +33,11 @@
 						<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 							<div class="container">
 								<div class="row">
-									<div class="col-8">
+									<div class="col-9">
 										<div class="input-group mb-3">
-											<input type="text" class="form-control" placeholder="Введите число"
+											<input type="text" id="inputMin" class="form-control" placeholder="Введите число"
 												aria-describedby="button-addon1">
+											</input>
 											<div class="input-group-append">
 												<button class="btn btn-info" type="button" id="button-addon1">Готово!</button>
 											</div>
@@ -63,18 +64,21 @@
 						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 							<div class="container">
 								<div class="row">
-									<div class="col-8">
+									<div class="col-9">
 										<div class="input-group mb-3">
-											<input type="text" class="form-control" placeholder="Введите число"
+											<input type="text" id="inputMax" class="form-control" placeholder="Введите число"
 												aria-describedby="button-addon2">
+											</input>
 											<div class="input-group-append">
-												<button class="btn btn-info" type="button" id="button-addon2">Готово!</button>
+												<button class="btn btn-info" type="button" id="button-addon2">&nbspСтарт!
+													&nbsp</button>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<output id="outputText"></output>
 					</div>
 					<div class="card-header">
 						<p class="m-0">Вопрос №<span id="orderNumberField">5</span></p>
@@ -88,9 +92,9 @@
 					</div>
 					<div class="card-body">
 						<div class="btn-group">
-							<button class="btn btn-info" id="btnLess">&#129047;<br>меньше</button>
+							<button class="btn btn-info" id="btnLess"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>меньше</button>
 							<button class="btn btn-success btn-lg" id="btnEqual">Верно!</button>
-							<button class="btn btn-info" id="btnOver">больше<br>&#129045;</button>
+							<button class="btn btn-info" id="btnOver">больше<br><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
 						</div>
 					</div>
 					<div class="card-footer">

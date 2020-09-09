@@ -1,17 +1,14 @@
-let minValue0 = parseInt(prompt('Минимальное знание числа для игры', '0')) || 0;
-let maxValue0Str = prompt('Максимальное знание числа для игры', '0') || 100;
-maxValue0 = parseInt(maxValue0Str);
-(minValue0 < -999) ? minValue = -999 :
-	(minValue0 > 999) ? minValue = 999 : minValue = minValue0;
-(maxValue0 > 999) ? maxValue = 999 :
-	(maxValue0 < -999) ? maxValue = -999 : maxValue = maxValue0;
-alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+let minValue = 0;
+let maxValue = 100;
 let answerNumber = Math.floor((minValue + maxValue) / 2);
 let orderNumber = 1;
 let gameRun = true;
 
 const orderNumberField = document.getElementById('orderNumberField');
 const answerField = document.getElementById('answerField');
+answerField.innerText = 'Игра еще не началась';
+
+document.getElementById('outputText').innerHTML = "Для начала игры введите минимальное и максимальное числа";
 
 orderNumberField.innerText = orderNumber;
 
@@ -39,19 +36,49 @@ function convert_tens(answerNumber) {
 function convert(answerNumber) {
 	if (answerNumber == 0) return "ноль";
 	else if (answerNumber < 0) {
-		answerNumberInWords = convert_hundreds(answerNumber);
+		result = - answerNumber;
+		answerNumberInWords = convert_hundreds(result);
 		return "минус" + " " + answerNumberInWords;
 	} else
 		return convert_hundreds(answerNumber);
 }
 
-answerNumberInWords0 = convert(answerNumber);
-answerNumberInWords = (answerNumberInWords0.length < 20) ? answerNumberInWords0 : answerNumber;
+document.getElementById('button-addon1').addEventListener('click', function () {
+	inputWindowMin = document.getElementById('inputMin');
+	inputMin = inputWindowMin.value;
+	minValue0 = parseInt(inputMin) || 0;
+})
 
-answerField.innerText = `Вы загадали число ${answerNumberInWords}?`;
+document.getElementById('button-addon2').addEventListener('click', function () {
+	inputWindowMax = document.getElementById('inputMax') || 100;
+	inputMax = inputWindowMax.value;
+	maxValue0 = (parseInt(inputMax) === 0) ? 0 : parseInt(inputMax) || 100;
+
+	(minValue0 < -999) ? minValue = -999 :
+		(minValue0 > 999) ? minValue = 999 : minValue = minValue0;
+	(maxValue0 > 999) ? maxValue = 999 :
+		(maxValue0 < -999) ? maxValue = -999 : maxValue = maxValue0;
+	TextOut = `Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`;
+	document.getElementById('outputText').innerHTML = TextOut;
+	answerNumber = Math.floor((minValue + maxValue) / 2);
+
+	answerNumberInWords0 = convert(answerNumber);
+	answerNumberInWords = (answerNumberInWords0.length < 20) ? answerNumberInWords0 :
+		(answerNumber < 0) ? (`минус ${- answerNumber}`) : answerNumber;
+
+	answerField.innerText = `Вы загадали число ${answerNumberInWords}?`;
+})
 
 document.getElementById('btnRetry').addEventListener('click', function () {
-	window.location.reload();
+	orderNumber = 1;
+	orderNumberField.innerText = orderNumber;
+	gameRun = true;
+
+	document.getElementById('outputText').innerHTML = "Для начала игры введите минимальное и максимальное числа";
+
+	inputWindowMax.value = '';
+	inputWindowMin.value = '';
+	answerField.innerText = 'Игра еще не началась';
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
@@ -91,12 +118,12 @@ document.getElementById('btnEqual').addEventListener('click', function () {
 	if (gameRun) {
 		const phraseRandom = Math.round(Math.random() * 3);
 		const answerPhrase = (phraseRandom === 0) ?
-			`Я всегда угадываю!\n\u{1F914}` :
+			`Я всегда угадываю!` :
 			(phraseRandom === 1) ?
-				`Ты разве не знал, что я гений?\n\u{1F92F}` :
+				`Ты разве не знал, что я гений?` :
 				(phraseRandom === 2) ?
-					`Я молодец?\n\u{1F92F}` :
-					`А вам слабо?\n\u{1F92F}`;
+					`Я молодец?` :
+					`А вам слабо?`;
 
 		answerField.innerText = answerPhrase;
 		gameRun = false;
