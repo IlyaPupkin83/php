@@ -34,7 +34,7 @@ function convert_tens(answerNumber) {
 }
 
 function convert(answerNumber) {
-	if (answerNumber == 0) return "ноль";
+	if (answerNumber == 0) return 0;
 	else if (answerNumber < 0) {
 		result = - answerNumber;
 		answerNumberInWords = convert_hundreds(result);
@@ -82,7 +82,6 @@ document.getElementById('btnRetry').addEventListener('click', function () {
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
-	$('.collapse').collapse("toggle");
 	if (gameRun) {
 		if (minValue === maxValue) {
 			const phraseRandom = Math.round(Math.random() * 3);
@@ -101,7 +100,9 @@ document.getElementById('btnOver').addEventListener('click', function () {
 			answerNumber = Math.floor((minValue + maxValue) / 2);
 			orderNumber++;
 			orderNumberField.innerText = orderNumber;
-			answerNumberInWords = convert(answerNumber);
+			answerNumberInWords0 = convert(answerNumber);
+			answerNumberInWords = (answerNumberInWords0.length < 20) ? answerNumberInWords0 :
+				(answerNumber < 0) ? (`минус ${- answerNumber}`) : answerNumber;
 			const phraseRandom = Math.round(Math.random() * 2);
 			const answerPhrase = (phraseRandom === 0) ?
 				`Вы загадали число ${answerNumberInWords}?` :
@@ -149,7 +150,9 @@ document.getElementById('btnLess').addEventListener('click', function () {
 			answerNumber = Math.floor((minValue + maxValue) / 2);
 			orderNumber++;
 			orderNumberField.innerText = orderNumber;
-			answerNumberInWords = convert(answerNumber);
+			answerNumberInWords0 = convert(answerNumber);
+			answerNumberInWords = (answerNumberInWords0.length < 20) ? answerNumberInWords0 :
+				(answerNumber < 0) ? (`минус ${- answerNumber}`) : answerNumber;
 			const phraseRandom = Math.round(Math.random() * 2);
 			const answerPhrase = (phraseRandom === 0) ?
 				`Вы загадали число ${answerNumberInWords}?` :
