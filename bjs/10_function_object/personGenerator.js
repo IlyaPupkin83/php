@@ -132,11 +132,6 @@ const personGenerator = {
 		return surn;
 	},
 
-	randomBirthYear: function () {
-		const byear = this.randomIntNumber(2020, 1900);
-		return byear;
-	},
-
 	randomProf: function () {
 		(this.person.gender === this.GENDER_MALE) ? (prof = this.randomValue(this.ProfMaleJson)) :
 			(prof = this.randomValue(this.ProfFemaleJson));
@@ -144,14 +139,15 @@ const personGenerator = {
 	},
 
 	randomBirthDate: function (date1, date2) {
-		let date11 = date1 || '01-01-1980';
+		let date11 = date1 || '01-01-1970';
 		let date22 = date2 || new Date().toLocaleDateString();
 		date11 = new Date(date11).getTime();
 		date22 = new Date(date22).getTime();
+		let options = { year: 'numeric', month: 'long', day: 'numeric' };
 		if (date11 > date22) {
-			return new Date(this.randomIntNumber(date22, date11)).toLocaleDateString();
+			return new Date(this.randomIntNumber(date22, date11)).toLocaleDateString('ru-RU', options);
 		} else {
-			return new Date(this.randomIntNumber(date11, date22)).toLocaleDateString();
+			return new Date(this.randomIntNumber(date11, date22)).toLocaleDateString('ru-RU', options);
 		}
 	},
 
@@ -168,3 +164,28 @@ const personGenerator = {
 		return this.person;
 	}
 };
+
+document.getElementById('button-start').addEventListener('click', function () {
+	const initPerson = personGenerator.getPerson();
+	document.getElementById('genderOutput').innerText = initPerson.gender;
+	document.getElementById('firstNameOutput').innerText = initPerson.firstName;
+	document.getElementById('surnameOutput').innerText = initPerson.surname;
+	document.getElementById('birthYearOutput').innerText = `${initPerson.birthYear}р.`;
+	document.getElementById('PatronymicOutput').innerText = initPerson.patronymic;
+	document.getElementById('ProfOutput').innerText = initPerson.prof;
+})
+
+document.getElementById('button-clear').addEventListener('click', function () {
+	delete personGenerator.person.gender;
+	delete personGenerator.person.firstName;
+	delete personGenerator.person.surname;
+	delete personGenerator.person.birthYear;
+	delete personGenerator.person.patronymic;
+	delete personGenerator.person.prof;
+	document.getElementById('genderOutput').innerText = 'Пол';
+	document.getElementById('firstNameOutput').innerText = '---';
+	document.getElementById('surnameOutput').innerText = 'Фамилия';
+	document.getElementById('birthYearOutput').innerText = 'Дата рождения';
+	document.getElementById('PatronymicOutput').innerText = '---';
+	document.getElementById('ProfOutput').innerText = '---';
+})
