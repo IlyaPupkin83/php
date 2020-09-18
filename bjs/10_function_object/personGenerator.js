@@ -173,7 +173,7 @@ document.getElementById('button-start').addEventListener('click', function () {
 	document.getElementById('birthYearOutput').innerText = `${initPerson.birthYear}р.`;
 	document.getElementById('PatronymicOutput').innerText = initPerson.patronymic;
 	document.getElementById('ProfOutput').innerText = initPerson.prof;
-})
+});
 
 document.getElementById('button-clear').addEventListener('click', function () {
 	delete personGenerator.person.gender;
@@ -188,4 +188,4 @@ document.getElementById('button-clear').addEventListener('click', function () {
 	document.getElementById('birthYearOutput').innerText = 'Дата рождения';
 	document.getElementById('PatronymicOutput').innerText = '---';
 	document.getElementById('ProfOutput').innerText = '---';
-})
+});
