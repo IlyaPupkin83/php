@@ -9,7 +9,7 @@
 * CSS (Bootstrap)
 
 * JavaScript
-git
+
 * Web-fonts
 
 ## Как открыть/запустить
